@@ -6,13 +6,14 @@ const prisma = new PrismaClient();
 
 //create
 router.post('/', async (req, res) => {
-    const { name, amount, startDate, isActive, frequency } = req.body;
+    const { name, amount, startDate, category, isActive, frequency } = req.body;
     try {
         const newSubscription = await prisma.subscription.create({
             data: {
                 name,
                 amount,
                 frequency,
+                category,
                 startDate: new Date(startDate),
                 isActive,
             },
@@ -33,11 +34,11 @@ router.get('/', async (_req, res) => {
 //update
 router.put('/:id', async (req, res) => {
     const { id } = req.params;
-    const { name, amount, startDate, isActive, frequency } = req.body;
+    const { name, amount, startDate, category, isActive, frequency } = req.body;
     try {
         const updated = await prisma.subscription.update({
             where: { id: id },
-            data: { name, amount, startDate: new Date(startDate), isActive, frequency },
+            data: { name, amount, category, startDate: new Date(startDate), isActive, frequency },
         });
         res.json(updated);
     } catch (err) {

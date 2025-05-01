@@ -12,7 +12,8 @@ model Subscription {
   name      String
   amount    Float
   startDate DateTime
-  isActive  Boolean
+  isActive  Boolean  @default(true)
   frequency String
+  category  String
   createdAt DateTime @default(now())
 }
